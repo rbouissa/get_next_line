@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbouissa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 17:58:49 by rbouissa          #+#    #+#             */
-/*   Updated: 2022/11/12 18:03:16 by rbouissa         ###   ########.fr       */
+/*   Created: 2022/11/10 23:55:06 by rbouissa          #+#    #+#             */
+/*   Updated: 2022/11/12 18:03:35 by rbouissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_allofit(int fd, char *str)
 {
@@ -96,15 +96,15 @@ char	*ft_rest(char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*lewl;
+	static char	*lewl[1024];
 	char		*tani;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	lewl = ft_allofit(fd, lewl);
-	if (!lewl)
+	lewl[fd] = ft_allofit(fd, lewl[fd]);
+	if (!lewl[fd])
 		return (0);
-	tani = ft_lwl(lewl);
-	lewl = ft_rest(lewl);
+	tani = ft_lwl(lewl[fd]);
+	lewl[fd] = ft_rest(lewl[fd]);
 	return (tani);
 }
